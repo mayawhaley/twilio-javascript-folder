@@ -1,5 +1,4 @@
-// phase3
-
+//phase4
 // initializing variables of every possible Roman Numeral
 var I = 1;
 var IV = 4;
@@ -15,11 +14,10 @@ var D = 500;
 var CM = 900;
 var M = 1000;
 
-
 // function that converts roman numerals into integers and then adds them together
-function romanToInt() {
+function romanToInt(numerals) {
 
-    var numerals = process.argv[2];
+    var numerals;
 
     var total = 0; // initializing the total to 0
 
@@ -124,6 +122,112 @@ function romanToInt() {
     return total // return total after for loop
 }
 
+
+function intToRoman(num) {
+
+    var num = process.argv[2]
+    // number to subtract from
+    // converts to int
+    var input = parseInt(num)
+
+    // returning string
+    var answer = "";
+
+    // while loop that runs as long as input isn't 0 and input is less than or equal to 1000
+
+    while (input !== 0 && input <= 1000) {
+
+        // handles 1-3
+        if (1 <= input && input < 4) {
+            if (input === 1) {
+                answer += "I";
+                input -= 1
+            }
+
+            else if (input === 2) {
+                answer += "II";
+                input -= 2
+            }
+            else {
+                answer += "III";
+                input -= 3
+            }
+
+        }
+        // handles 4
+        else if (input === 4) {
+            answer += "IV"
+            input -= 4
+        }
+
+        // handles 5-8
+        else if (5 <= input && input < 9) {
+            answer += "V"
+            input -= 5
+        }
+
+        // handles 9
+        else if (input === 9) {
+            answer += "IX"
+            input -= 9
+        }
+
+        // handles 10-39
+        else if (10 <= input && input < 40) {
+            answer += "X"
+            input -= 10
+        }
+
+        // handles 40-49
+        else if (40 <= input && input < 50) {
+            answer += "XL"
+            input -= 40
+        }
+
+        // handles 50-89
+        else if (50 <= input && input < 90) {
+            answer += "L"
+            input -= 50
+        }
+
+
+        // handles 90-99
+        else if (90 <= input && input < 100) {
+            answer += "XC"
+            input -= 90
+        }
+
+        // handles 100-499
+        else if (100 <= input && input < 500) {
+            answer += "C"
+            input -= 100
+        }
+
+        // handles 500-899
+        else if (500 <= input && input < 900) {
+            answer += "D"
+            input -= 500
+        }
+
+        //handles 900-999
+        else if (900 <= input && input < 1000) {
+            answer += "CM"
+            input -= 900
+        }
+
+        // handles 1000
+        else if (input === 1000) {
+            answer += "M"
+            input -= 1000
+        }
+
+    }
+    return answer // return total after for loop
+
+}
+
+
+
 // calculator 
 function calculate() {
 
@@ -160,19 +264,43 @@ function calculate() {
     if (operand === "%") {
         ans = first % second
     }
-
-    return ans
+    var numeral = intToRoman(ans) // converts result to Roman Numerals
+    var both = `${ans}, ${numeral}` // places both integer and Roman Numerals in a string
+    return both
 
 }
+
 
 // assigns arguments to their respective variables
 function get_args() {
 
-    var first = process.argv[2] // gets first number
-    var op = process.argv[3] // gets operator 
-    var second = process.argv[4] // gets second number
+    var first = process.argv[2]
+    var op = process.argv[3]
+    var second = process.argv[4]
+
+    // checks to see if user input is a number, if not the input is converted
+    if (isNumber(first) == false || isNumber(second) == false) {
+        if (isNumber(first) == false) {
+            first = romanToInt(process.argv[2])
+        }
+
+        if (isNumber(second) == false) {
+            second = romanToInt(process.argv[4])
+        }
+    }
 
     return [first, op, second] // return arguments
 }
 
-console.log(romanToInt())
+// function that checks if parameter is a number
+function isNumber(n) {
+    var input = parseInt(n)
+    if (Number.isInteger(input)) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+console.log(intToRoman())
