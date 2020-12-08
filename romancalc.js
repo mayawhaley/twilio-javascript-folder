@@ -1,4 +1,5 @@
-//phase4
+//phase5
+
 // initializing variables of every possible Roman Numeral
 var I = 1;
 var IV = 4;
@@ -125,7 +126,6 @@ function romanToInt(numerals) {
 
 function intToRoman(num) {
 
-    var num = process.argv[2]
     // number to subtract from
     // converts to int
     var input = parseInt(num)
@@ -133,9 +133,12 @@ function intToRoman(num) {
     // returning string
     var answer = "";
 
+
     // while loop that runs as long as input isn't 0 and input is less than or equal to 1000
 
     while (input !== 0 && input <= 1000) {
+
+
 
         // handles 1-3
         if (1 <= input && input < 4) {
@@ -264,7 +267,15 @@ function calculate() {
     if (operand === "%") {
         ans = first % second
     }
-    var numeral = intToRoman(ans) // converts result to Roman Numerals
+
+    // converts result to Roman Numerals
+    // checks to make sure the number is a whole number
+    if (ans % 1 != 0) {
+        numeral = ""
+    } else {
+        numeral = intToRoman(ans)
+    }
+
     var both = `${ans}, ${numeral}` // places both integer and Roman Numerals in a string
     return both
 
@@ -303,4 +314,4 @@ function isNumber(n) {
     }
 }
 
-console.log(intToRoman())
+console.log(calculate())
