@@ -1,4 +1,4 @@
-//connect_four.js
+//tictac_connect.js
 
 console.log("Let's play Connect Four!\nUse play(r,c) First argument is Row, Second argument is Column");
 const player = "🔴";
