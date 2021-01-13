@@ -30,31 +30,34 @@ let boardobject = {
 // checks if the player or computer has won
 function victory(x, y, p) {
 
+    var isWon = false;
+
+    // checks horizontal and vertical cases
+    for (let column = 0; column < 9; column++) {
+        for (let row = 0; row < 8; row++) {
+            if (
+                // handles horizontal cases
+                (boardobject[`${x}_${column}`] == p && boardobject[`${x}_${column + 1}`] == p && boardobject[`${x}_${column + 2}`] == p && boardobject[`${x}_${column + 3}`] == p) ||
+
+                // handles vertical cases
+                (boardobject[`${row}_${y}`] == p && boardobject[`${row + 1}_${y}`] == p && boardobject[`${row + 2}_${y}`] == p && boardobject[`${row + 3}_${y}`] == p) ||
+
+                // handles forward diagonal /
+                (boardobject[`${row}_${column}`] == p && boardobject[`${row - 1}_${column + 1}`] == p && boardobject[`${row - 2}_${column + 2}`] == p && boardobject[`${row - 3}_${column + 3}`] == p) ||
+
+                // handles backwards diagonal \
+                (boardobject[`${row}_${column}`] == p && boardobject[`${row + 1}_${column + 1}`] == p && boardobject[`${row + 2}_${column + 2}`] == p && boardobject[`${row + 3}_${column + 3}`] == p)) {
+
+                isWon = true;
+
+            };
+        }
+
+
+    }
+
     // winning cases
-    if (
-        // checking horizontal forward
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x}_${y + 1}`] == p && boardobject[`${x}_${y + 2}`] == p && boardobject[`${x}_${y + 3}`] == p) ||
-
-        // checking horizontal backwards
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x}_${y - 1}`] == p && boardobject[`${x}_${y - 2}`] == p && boardobject[`${x}_${y - 3}`] == p) ||
-
-        // checking vertical forwards
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x + 1}_${y}`] == p && boardobject[`${x + 2}_${y}`] == p && boardobject[`${x + 3}_${y}`] == p) ||
-
-        // checking vertical backwards
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x - 1}_${y}`] == p && boardobject[`${x - 2}_${y}`] == p && boardobject[`${x - 3}_${y}`] == p) ||
-
-        // checking forward diagonal upwards /
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x - 1}_${y + 1}`] == p && boardobject[`${x - 2}_${y + 2}`] == p && boardobject[`${x - 3}_${y + 3}`] == p) ||
-
-        // checking forward diagonal backwards /
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x + 1}_${y - 1}`] == p && boardobject[`${x + 2}_${y - 2}`] == p && boardobject[`${x + 3}_${y - 3}`] == p) ||
-
-        // checking downward diagonal fowards \
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x + 1}_${y + 1}`] == p && boardobject[`${x + 2}_${y + 2}`] == p && boardobject[`${x + 3}_${y + 3}`] == p) ||
-
-        // checking downward diagonal backwards \
-        (boardobject[`${x}_${y}`] == p && boardobject[`${x - 1}_${y - 1}`] == p && boardobject[`${x - 2}_${y - 2}`] == p && boardobject[`${x - 3}_${y - 3}`] == p)
+    if (isWon
 
     ) {
         // the computer wins
